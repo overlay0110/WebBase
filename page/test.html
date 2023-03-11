@@ -1,0 +1,42 @@
+<br><br><br><br><br><br><br><br><br><br>
+<h1>test.html</h1>
+<button onclick="call('check')">call</button>
+
+<script>
+function call(option){
+    if(isRun){
+        return false;
+    }
+    isRun = true;
+
+	const formData = new FormData();
+    formData.append("type", "api" );
+    formData.append("option", option );
+
+    $.ajax({
+        type: 'post',
+        url: "./",
+        processData: false,
+        contentType: false,
+        data: formData,
+        dataType: "json",
+        success: function(data)	{
+            isRun = false;
+			console.log(data);
+            if(data.code=="0") {
+				/*
+                Swal.fire({text: data.msg, icon: 'success', confirmButtonText: 'OK'})
+                .then((result) => {
+                    if (result.isConfirmed || result.isDismissed){
+                        location.reload();             
+                    }
+                });
+				*/
+                
+            } else {
+                //Swal.fire({text: data.msg, icon: 'error', confirmButtonText: 'OK'});
+            }
+        }
+    });	
+}
+</script>
